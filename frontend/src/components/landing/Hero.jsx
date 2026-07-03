@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Play, Eye, Sparkles } from 'lucide-react';
+import { ArrowRight, Play, Eye } from 'lucide-react';
 import DashboardPreview from './DashboardPreview';
 import InfinityBackground from '../decor/InfinityBackground';
 import StudyDecor from '../decor/StudyDecor';
@@ -16,10 +16,6 @@ export default function Hero() {
       <div className="relative max-w-[1280px] mx-auto px-6 pt-16 lg:pt-24 pb-20 lg:pb-28">
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-violet-200 bg-blue-50 mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-violet-600" />
-              <span className="text-[11.5px] font-medium tracking-wide text-violet-700">AI-powered personalized learning</span>
-            </div>
             <h1 className="h-display text-[52px] sm:text-[64px] lg:text-[76px]">
               A study tool <br />
               <span className="font-serif-italic">tailored</span> just for you.
