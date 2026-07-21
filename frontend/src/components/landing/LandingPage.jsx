@@ -48,11 +48,11 @@ export default function LandingPage({ hash }) {
       <Hero />
       <StudentGallery3D />
       <ProductStats />
+      <FoundingStory />
       <PredictedGrade />
       <WhyDifferent />
       <HowItWorks />
       <FreeResources />
-      <FoundingStory />
       <Pricing />
       <TryQuestion />
       <FAQ />
