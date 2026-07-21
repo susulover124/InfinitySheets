@@ -540,7 +540,18 @@ html.dark .liquid-glass-clear {
 }
 
 /* ===== Mascot (Sheety) ===== */
-.mascot-glow { filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.8)); }
+.mascot-glow { filter: drop-shadow(0 0 6px rgba(76, 160, 255, 0.85)) drop-shadow(0 0 12px rgba(76, 160, 255, 0.35)); }
+@keyframes mascot-pulse {
+    0%, 100% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.06); filter: brightness(1.15); }
+}
+.mascot-pulse { transform-box: fill-box; transform-origin: center; animation: mascot-pulse 2.4s ease-in-out infinite; }
+@keyframes mascot-blink {
+    0%, 92%, 100% { opacity: 0; }
+    94% { opacity: 0.65; }
+    96% { opacity: 0.2; }
+}
+.mascot-blink { animation: mascot-blink 4.6s ease-in-out infinite; }
 @keyframes mascot-bob {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-7px); }
@@ -564,7 +575,7 @@ html.dark .liquid-glass-clear {
 }
 .mascot-sparkle { animation: mascot-sparkle 2.8s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
-    .mascot-bob, .mascot-wave-arm, .mascot-leg-l, .mascot-leg-r, .mascot-sparkle { animation: none; }
+    .mascot-bob, .mascot-wave-arm, .mascot-leg-l, .mascot-leg-r, .mascot-sparkle, .mascot-pulse, .mascot-blink { animation: none; }
 }
 
 /* Screenshot tilt-on-hover (premium depth; JS sets the custom props) */
