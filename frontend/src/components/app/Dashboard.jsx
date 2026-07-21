@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { CalendarClock, Sparkles } from 'lucide-react';
 import { useStrengthsWeaknesses, useSavedSwOverrides } from '../../hooks/useStrengthsWeaknesses';
-import { predictedScore, formatGrade, scoreToIBGrade, TONE_CLASSES, isGradedTrack } from '../../lib/predictedGrade';
+import { predictedScore, formatGrade, scoreToIBGrade } from '../../lib/predictedGrade';
 import PredictedScoreMini from './PredictedScoreMini';
 
 // Rotating dashboard greetings. `{name}` is substituted with the student's
@@ -150,6 +150,20 @@ export default function Dashboard({ go }) {
     return Math.round(weighted / totalSheets);
   }, [ws, perSubjectGrades]);
 
+  // Chronological worksheet series per subject — mirrors what the Progress
+  // page's LineChart consumes, so the dashboard preview matches the full view.
+  const chartData = useMemo(() => {
+    const chronological = [...ws].slice().reverse(); // oldest first
+    const subjects = Array.from(new Set(chronological.map((w) => w.subject))).sort();
+    const series = {};
+    subjects.forEach((s) => { series[s] = []; });
+    chronological.forEach((w, i) => {
+      if (!series[w.subject]) return;
+      series[w.subject].push({ x: i, score: w.score });
+    });
+    return { subjects, series, total: chronological.length };
+  }, [ws]);
+
   // IB total: sum of per-subject IB grades (out of subjectCount × 7).
   // Only shown when the student is on the IB track — CBSE/ICSE stay per-subject.
   const ibTotal = useMemo(() => {
@@ -251,17 +265,23 @@ export default function Dashboard({ go }) {
       </div>
 
       {perSubjectGrades.length > 0 && (
-        <div className="rounded-xl border border-[color:var(--color-border)] bg-white p-5" data-testid="dashboard-predicted-grades">
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => go('progress')}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go('progress'); } }}
+          className="group rounded-xl border border-[color:var(--color-border)] bg-white p-5 text-left cursor-pointer hover:border-blue-300 hover:shadow-md transition-all"
+          data-testid="dashboard-performance-preview"
+          aria-label="Open performance page"
+        >
           <div className="flex items-center justify-between mb-3 gap-3">
             <div>
               <div className="eyebrow-muted flex items-center gap-1.5">
                 <Sparkles className="w-4 h-4 text-blue-600" />
-                Predicted grades
+                Performance
               </div>
               <div className="text-[12px] text-slate-500 mt-0.5">
-                {isGradedTrack(examTrack)
-                  ? `${examTrack.toUpperCase()}-style, per subject. Difficulty-weighted and heavily biased toward your most recent worksheet.`
-                  : 'Per subject. Difficulty-weighted and heavily biased toward your most recent worksheet.'}
+                Your worksheet scores over time. Click to open the full performance page.
               </div>
             </div>
             {ibTotal && (
@@ -274,10 +294,9 @@ export default function Dashboard({ go }) {
               </div>
             )}
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-            {perSubjectGrades.map((g) => (
-              <PredictedGradeMini key={g.subject} g={g} onClick={() => go('progress')} />
-            ))}
+          <PerformanceLineChart subjects={chartData.subjects} series={chartData.series} totalX={chartData.total} />
+          <div className="mt-2 text-right text-[12px] text-blue-600 font-medium opacity-70 group-hover:opacity-100 transition-opacity">
+            Open performance &rarr;
           </div>
         </div>
       )}
@@ -344,29 +363,70 @@ export default function Dashboard({ go }) {
 }
 
 
-function PredictedGradeMini({ g, onClick }) {
-  const tone = TONE_CLASSES[g.grade?.tone] || TONE_CLASSES.ok;
+function PerformanceLineChart({ subjects, series, totalX }) {
+  const w = 800;
+  const h = 240;
+  const padL = 48;
+  const padR = 14;
+  const padT = 12;
+  const padB = 34;
+  const chartW = w - padL - padR;
+  const chartH = h - padT - padB;
+
+  const nX = Math.max(1, (totalX || 1) - 1);
+  const stepX = chartW / nX;
+  const xAt = (i) => padL + i * stepX;
+  const yAt = (score) => padT + chartH - (Math.max(0, Math.min(100, score)) / 100) * chartH;
+
+  const gridLines = [0, 25, 50, 75, 100];
+  const palette = ['#2563eb', '#7c3aed', '#dc2626', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#0ea5e9', '#14b8a6'];
+
+  if (!subjects || subjects.length === 0 || totalX < 1) {
+    return (
+      <div className="h-40 flex items-center justify-center text-[13px] text-slate-500 border border-dashed border-slate-200 rounded-lg">
+        Complete a worksheet to start drawing your improvement line.
+      </div>
+    );
+  }
+
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`text-left rounded-lg border ${tone.border} ${tone.bg} p-3 hover:brightness-95 transition group`}
-      data-testid={`pred-grade-${g.subject}`}
-    >
-      <div className="flex items-center justify-between gap-2">
-        <div className="min-w-0">
-          <div className="text-[13px] font-semibold text-slate-900 truncate">{g.subject}</div>
-          <div className="text-[10.5px] text-slate-500 tabular-nums">
-            {g.count} {g.count === 1 ? 'worksheet' : 'worksheets'}
-          </div>
-        </div>
-        <div className={`text-[20px] font-bold ${tone.text} tabular-nums leading-none`}>
-          {g.grade?.label ?? '\u2014'}
-        </div>
+    <div className="w-full">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto" role="img" aria-label="Worksheet scores over time, per subject">
+        {/* horizontal grid + y labels */}
+        {gridLines.map((g) => (
+          <g key={g}>
+            <line x1={padL} x2={w - padR} y1={yAt(g)} y2={yAt(g)} stroke="#e2e8f0" strokeDasharray="4 5" />
+            <text x={padL - 8} y={yAt(g) + 4} fontSize="11" fill="#94a3b8" textAnchor="end">{g}%</text>
+          </g>
+        ))}
+        {/* subject lines */}
+        {subjects.map((s, si) => {
+          const points = series[s] || [];
+          if (points.length === 0) return null;
+          const color = palette[si % palette.length];
+          const d = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${xAt(p.x)} ${yAt(p.score)}`).join(' ');
+          return (
+            <g key={s}>
+              <path d={d} fill="none" stroke={color} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+              {points.map((p, i) => (
+                <circle key={i} cx={xAt(p.x)} cy={yAt(p.score)} r={3.2} fill={color} stroke="#fff" strokeWidth="1.6" />
+              ))}
+            </g>
+          );
+        })}
+        {/* x-axis label */}
+        <text x={padL} y={h - 10} fontSize="10.5" fill="#94a3b8">Oldest</text>
+        <text x={w - padR} y={h - 10} fontSize="10.5" fill="#94a3b8" textAnchor="end">Latest worksheet</text>
+      </svg>
+      {/* legend */}
+      <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5">
+        {subjects.map((s, si) => (
+          <span key={s} className="inline-flex items-center gap-1.5 text-[12px] text-slate-600">
+            <span className="w-2.5 h-2.5 rounded-full" style={{ background: palette[si % palette.length] }} />
+            <span className="truncate max-w-[140px]">{s}</span>
+          </span>
+        ))}
       </div>
-      <div className="mt-2 h-1.5 rounded-full bg-white/60 overflow-hidden">
-        <div className={`h-full ${tone.dot}`} style={{ width: `${g.score}%` }} />
-      </div>
-    </button>
+    </div>
   );
 }
