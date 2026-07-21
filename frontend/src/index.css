@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Kalam:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -792,74 +792,3 @@ html.dark .c-ring path { stroke: #60a5fa; }
     to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 .animate-tut-in { animation: tut-in 0.32s ease-out both; }
-
-
-/* ===== Notebook-note (handwritten descriptions on ruled paper) =====
- * Applied to landing-page description paragraphs. The element+class
- * selector (p.notebook-note) has higher specificity than Tailwind's
- * single-class colour / leading utilities, so it overrides them without
- * needing !important. Lines are placed so the baseline of each line
- * lands on the ruled rule.
- */
-p.notebook-note,
-.notebook-note {
-    font-family: 'Kalam', 'Caveat', 'Comic Sans MS', cursive;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 32px;
-    color: #172554;                                  /* ink navy */
-    padding: 12px 22px 16px 62px;
-    border: 1px solid rgba(15, 23, 42, 0.10);
-    border-radius: 12px;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.45);
-    background-color: #fdf8e7;                       /* warm paper */
-    background-image:
-        /* red left-margin rule */
-        linear-gradient(to right,
-            transparent 0,
-            transparent 48px,
-            rgba(220, 68, 68, 0.55) 48px,
-            rgba(220, 68, 68, 0.55) 49px,
-            transparent 49px),
-        /* faint blue horizontal rules every 32px */
-        repeating-linear-gradient(to bottom,
-            transparent 0,
-            transparent 31px,
-            rgba(96, 132, 189, 0.55) 31px,
-            rgba(96, 132, 189, 0.55) 32px);
-    background-position: 0 12px, 0 12px;
-    background-repeat: no-repeat, repeat-y;
-    background-size: 100% 100%, 100% auto;
-    text-align: left;
-    letter-spacing: 0.005em;
-}
-
-/* Inline emphasis inside notebook-note keeps the handwritten feel: bolder
- * and slightly heavier ink, but never switches to Inter. */
-p.notebook-note strong,
-p.notebook-note b,
-p.notebook-note em,
-p.notebook-note .notebook-note-em,
-p.notebook-note mark {
-    font-family: inherit;
-    font-weight: 700;
-    color: inherit;
-    background: transparent;
-}
-
-/* On the dark theme sections a warmer paper still reads well; nothing to
- * override, but reduce shadow contrast so it doesn't look boxed-out. */
-.section-dark p.notebook-note {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.45);
-}
-
-/* Slight tilt on hover for a hand-torn page feel — polite, not gimmicky. */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    p.notebook-note {
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
-    }
-    p.notebook-note:hover {
-        transform: rotate(-0.35deg);
-        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.10), inset 0 0 0 1px rgba(255, 255, 255, 0.45);
-    }
-}

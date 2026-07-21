@@ -105,12 +105,12 @@ export default function PredictedGrade() {
               <h2 className="h-display text-[44px] sm:text-[56px] lg:text-[64px] leading-[1.05]">
                 Know your grade <span className="font-serif-italic">before</span> the exam does.
               </h2>
-              <p className="notebook-note mt-6 max-w-[520px]">
+              <p className="mt-6 text-[16.5px] text-slate-600 leading-relaxed max-w-[520px]">
                 Every worksheet sharpens your predicted score. For courses like the IGCSE and IB,
                 where predicted grades shape university applications, that means no more guessing
                 how ready you are&mdash;<Emphasis variant="underline" className="font-medium text-slate-700">you can see it</Emphasis>, and you can change it while there is still time.
               </p>
-              <p className="notebook-note mt-4 max-w-[520px]">
+              <p className="mt-4 text-[14px] text-slate-500 max-w-[520px]">
                 Hover any point for the attempt&rsquo;s topic, score, and date. Click a line to see the
                 full subject breakdown.
               </p>
