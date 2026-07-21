@@ -24,7 +24,7 @@ export default function WhyDifferent() {
             <h2 className="h-display text-slate-900 text-[44px] sm:text-[60px] lg:text-[72px] leading-[1.05]">
               Real practice, <Emphasis variant="highlight" amber>real results</Emphasis>.
             </h2>
-            <p className="mt-7 text-[16.5px] sm:text-[18px] leading-relaxed text-slate-600 max-w-[720px] mx-auto">
+            <p className="notebook-note mt-7 max-w-[720px] mx-auto">
               Practice sheets catered to your exact exam&mdash;the right boards, the right question
               styles, the right mark schemes&mdash;and tweaked to your level as you improve. Where
               you struggle, the sheets meet you where you are and build you up. Where you are

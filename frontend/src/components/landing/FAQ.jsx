@@ -80,7 +80,7 @@ export default function FAQ() {
                     {isOpen ? <Minus className="w-4 h-4 shrink-0 text-slate-400" /> : <Plus className="w-4 h-4 shrink-0 text-slate-400" />}
                   </button>
                   {isOpen && (
-                    <p className="px-6 pb-5 text-[14.5px] text-slate-600 leading-relaxed">{f.a}</p>
+                    <p className="notebook-note mx-6 mb-5">{f.a}</p>
                   )}
                 </div>
               );

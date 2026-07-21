@@ -94,7 +94,7 @@ export default function TryQuestion() {
             <div className="hidden lg:block absolute -left-52 top-4"><DoodleEquations /></div>
             <div className="eyebrow mb-5">Feel it for yourself</div>
             <h2 className="h-display text-[44px] sm:text-[56px] lg:text-[64px] leading-[1.05]">Try a real question. Right here.</h2>
-            <p className="mt-5 text-[16px] text-slate-500 leading-relaxed">
+            <p className="notebook-note mt-5 max-w-[640px] mx-auto">
               This is what practice on InfinitySheets feels like&mdash;instant marking, an explanation, and a read on your weak spots.
             </p>
           </div>

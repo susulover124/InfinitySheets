@@ -42,7 +42,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-8 text-[18px] sm:text-[20px] text-slate-500 max-w-[680px] leading-relaxed"
+          className="notebook-note mt-8 max-w-[680px] mx-auto"
         >
           Coaching centres win exams with endless on-syllabus practice, focused work on weak
           concepts, and total exam familiarity. InfinitySheets puts that training on any

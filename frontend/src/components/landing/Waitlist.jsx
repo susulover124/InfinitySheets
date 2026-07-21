@@ -75,7 +75,7 @@ export default function Waitlist({ variant = 'section', id }) {
     return (
       <div id="waitlist" className="relative scroll-mt-24 mt-14 w-full max-w-[680px] rounded-3xl liquid-glass border border-slate-200 px-6 py-7 sm:px-10 text-center shadow-xl shadow-slate-300/40">
         <h2 className="h-display text-slate-900 text-[24px] sm:text-[28px] leading-[1.1]">Be one of the first students in.</h2>
-        <p className="mt-2 text-[14px] text-slate-600 leading-relaxed max-w-[520px] mx-auto">
+        <p className="notebook-note mt-4 max-w-[520px] mx-auto">
           Drop your email and we&rsquo;ll let you know the moment it&rsquo;s live&mdash;no spam, just the launch.
         </p>
         {form}
@@ -92,7 +92,7 @@ export default function Waitlist({ variant = 'section', id }) {
         <h2 className="h-display text-slate-900 text-[28px] sm:text-[34px] lg:text-[38px] leading-[1.05]">
           Be one of the first students in.
         </h2>
-        <p className="mt-3 text-[15px] text-slate-600 leading-relaxed max-w-[560px] mx-auto">
+        <p className="notebook-note mt-4 max-w-[560px] mx-auto">
           We&rsquo;re opening InfinitySheets to a first group of students. Drop your email and
           we&rsquo;ll let you know the moment it&rsquo;s live&mdash;no spam, just the launch.
         </p>
