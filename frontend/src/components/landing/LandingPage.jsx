@@ -48,14 +48,14 @@ export default function LandingPage({ hash }) {
       <Hero />
       <StudentGallery3D />
       <ProductStats />
+      <PredictedGrade />
       <WhyDifferent />
       <HowItWorks />
-      <TryQuestion />
-      <PredictedGrade />
       <FreeResources />
       <FoundingStory />
-      <FAQ />
       <Pricing />
+      <TryQuestion />
+      <FAQ />
       {/* Pre-launch build: one consistent ask — the waitlist (keeps the #signup anchor for all Start Free / Log In links) */}
       <Waitlist id="signup" />
       <Footer />

@@ -79,24 +79,19 @@ export default function Hero() {
         >
           <Waitlist variant="inline" />
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-16 text-center"
-        >
-          <div className="eyebrow mb-3">In the wild</div>
-          <h2 className="h-display text-[30px] sm:text-[38px] lg:text-[44px] leading-[1.05]">Students already studying with it.</h2>
-        </motion.div>
         <FeatureCarousel />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.55 }}
-          className="mt-10 flex flex-wrap lg:flex-nowrap items-center justify-center gap-2"
+          className="mt-12 flex flex-wrap lg:flex-nowrap items-center justify-center gap-3"
         >
           {EXAM_TRACKS.map((t) => (
-            <a key={t.id} href={`#resources?track=${t.id}`} className="whitespace-nowrap px-3.5 py-1.5 rounded-full border border-slate-200 bg-white/70 backdrop-blur text-[13.5px] text-slate-600 hover:border-blue-400 hover:text-blue-700 transition-colors">
+            <a
+              key={t.id}
+              href={`#resources?track=${t.id}`}
+              className="whitespace-nowrap px-5 py-2.5 rounded-full border border-slate-300 bg-white text-[15px] font-semibold text-slate-800 shadow-md shadow-slate-900/5 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20 hover:border-blue-500 hover:text-blue-700 transition-all duration-200"
+            >
               {t.name}
             </a>
           ))}
