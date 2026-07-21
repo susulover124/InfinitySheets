@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ArrowRight, Check, Mail } from 'lucide-react';
-import Mascot from '../decor/Mascot';
 
 // To collect real leads, set REACT_APP_WAITLIST_ENDPOINT to a form endpoint
 // (Formspree, Google Form's formResponse URL, or your own /api/waitlist
@@ -75,10 +74,6 @@ export default function Waitlist({ variant = 'section', id }) {
   if (inline) {
     return (
       <div id="waitlist" className="relative scroll-mt-24 mt-14 w-full max-w-[680px] rounded-3xl liquid-glass border border-slate-200 px-6 py-7 sm:px-10 text-center shadow-xl shadow-slate-300/40">
-        {/* Sheety peeking over the top edge, waving hello */}
-        <div className="absolute -top-[46px] left-8 pointer-events-none" aria-hidden="true">
-          <Mascot pose="peek" width={78} />
-        </div>
         <h2 className="h-display text-slate-900 text-[24px] sm:text-[28px] leading-[1.1]">Be one of the first students in.</h2>
         <p className="mt-2 text-[14px] text-slate-600 leading-relaxed max-w-[520px] mx-auto">
           Drop your email and we&rsquo;ll let you know the moment it&rsquo;s live&mdash;no spam, just the launch.

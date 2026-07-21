@@ -3,7 +3,6 @@ import { Check, X } from 'lucide-react';
 import Reveal from './Reveal';
 import { DoodleAtom, DoodleBooks } from '../decor/StudyDoodles';
 import Emphasis from './Emphasis';
-import Mascot from '../decor/Mascot';
 
 const COMPARISON = [
   { them: 'Rereading notes until they blur together', us: 'Answering exam-style questions that stick' },
@@ -35,10 +34,6 @@ export default function WhyDifferent() {
         </Reveal>
         <Reveal delay={0.15}>
           <div className="mt-16 max-w-[920px] mx-auto w-full relative">
-            {/* Sheety perched on the comparison table */}
-            <div className="hidden md:block absolute -top-[76px] right-10 z-10 pointer-events-none" aria-hidden="true">
-              <Mascot pose="sit" width={82} />
-            </div>
             <div className="rounded-3xl liquid-glass overflow-hidden">
               <div className="grid grid-cols-2 border-b border-slate-200">
                 <div className="px-6 py-4 text-[13px] font-semibold text-slate-500 uppercase tracking-wider">Traditional studying</div>

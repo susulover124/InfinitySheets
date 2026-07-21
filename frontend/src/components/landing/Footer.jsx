@@ -1,7 +1,6 @@
 import React from 'react';
 import { Infinity } from 'lucide-react';
 import { RESOURCE_TRACKS } from '../../data/resources';
-import Mascot from '../decor/Mascot';
 
 const PRODUCT_LINKS = [
   { label: 'Features', href: '#features' },
@@ -22,7 +21,6 @@ export default function Footer() {
           <p className="mt-3 text-[12.5px] text-zinc-500 leading-relaxed max-w-[220px]">
             Endless exam-style practice, tuned to your weak spots. Free forever.
           </p>
-          <div className="mt-4" aria-hidden="true"><Mascot pose="wave" width={72} /></div>
         </div>
         <div>
           <div className="text-[11px] tracking-[0.14em] uppercase font-semibold text-zinc-400 mb-3">Product</div>

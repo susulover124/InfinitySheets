@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { HOW_IT_WORKS } from '../../data/mock';
 import { ArrowDown } from 'lucide-react';
 import Reveal from './Reveal';
-import Mascot from '../decor/Mascot';
 import { DoodleLaptop, DoodleStationery } from '../decor/StudyDoodles';
 import Emphasis from './Emphasis';
 import StepDemo from './StepDemo';
@@ -78,10 +77,6 @@ export default function HowItWorks() {
           <Reveal delay={0.15}>
             <div className="lg:sticky lg:top-24">
               <div className="relative liquid-glass rounded-3xl p-6">
-                {/* Sheety sitting on the demo panel, watching the steps play */}
-                <div className="hidden lg:block absolute -top-[62px] right-6 pointer-events-none" aria-hidden="true">
-                  <Mascot pose="sit" width={70} />
-                </div>
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-[12px] tracking-wider uppercase font-semibold text-slate-500">
                     Step {HOW_IT_WORKS[active].n} &middot; {HOW_IT_WORKS[active].title}

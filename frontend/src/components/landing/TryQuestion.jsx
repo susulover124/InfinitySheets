@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Check, X, ArrowRight, RefreshCw } from 'lucide-react';
 import Reveal from './Reveal';
-import Mascot from '../decor/Mascot';
 import { DoodleEquations } from '../decor/StudyDoodles';
 
 const QUESTIONS = [
@@ -102,10 +101,6 @@ export default function TryQuestion() {
         </Reveal>
         <Reveal delay={0.15}>
           <div className="relative mt-14 max-w-[720px] mx-auto w-full">
-            {/* Sheety gripping the top edge of the question card, watching you answer */}
-            <div className="hidden md:block absolute -top-[47px] left-10 pointer-events-none" aria-hidden="true">
-              <Mascot pose="peek" width={76} />
-            </div>
             <div className="rounded-3xl liquid-glass shadow-xl shadow-slate-900/5 overflow-hidden">
               <div className="px-7 py-4 border-b border-slate-200/60 flex items-center justify-between">
                 <span className="text-[12px] font-semibold tracking-wider uppercase text-blue-600">{QUESTION.track}</span>

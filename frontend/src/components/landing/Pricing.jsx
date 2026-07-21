@@ -3,7 +3,6 @@ import { Check, ArrowRight } from 'lucide-react';
 import Reveal from './Reveal';
 import { DoodleGradCap } from '../decor/StudyDoodles';
 import Emphasis from './Emphasis';
-import Mascot from '../decor/Mascot';
 
 const FEATURES = [
   'Personalized worksheets for your exact syllabus',
@@ -36,10 +35,6 @@ export default function Pricing() {
           </Reveal>
           <Reveal from="scale" delay={0.15}>
             <div className="relative rounded-3xl p-8 liquid-glass-clear shadow-2xl shadow-slate-900/10">
-              {/* Sheety sitting on the pricing card, legs dangling over $0 */}
-              <div className="hidden lg:block absolute -top-[74px] right-8 pointer-events-none" aria-hidden="true">
-                <Mascot pose="sit" width={84} />
-              </div>
               <div className="text-[11px] tracking-[0.14em] uppercase font-semibold text-blue-600">Everything, free</div>
               <div className="flex items-baseline gap-3 mt-3">
                 <Emphasis variant="circle">
