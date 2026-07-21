@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import ProductStats from './ProductStats';
-import ProductPeek from './ProductPeek';
 import WhyDifferent from './WhyDifferent';
 import HowItWorks from './HowItWorks';
 import TryQuestion from './TryQuestion';
@@ -47,7 +46,6 @@ export default function LandingPage({ hash }) {
     <div className="section-bg">
       <Navbar onStart={onStart} />
       <Hero />
-      <ProductPeek />
       <StudentGallery3D />
       <ProductStats />
       <WhyDifferent />
