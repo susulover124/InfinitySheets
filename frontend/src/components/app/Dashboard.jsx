@@ -128,27 +128,28 @@ export default function Dashboard({ go }) {
   }, [perSubjectGrades]);
   const visibleSubjects = useMemo(() => perSubjectGrades.map((g) => g.subject), [perSubjectGrades]);
 
-  // Overall accuracy — average of each subject's accuracy, weighted by the
-  // number of worksheets the student has done in that subject (per spec:
-  // "this accuracy score is determined by the amount of worksheets done in
-  // a subject"). Falls back to null when no worksheets exist yet.
+  // Accuracy change (delta): compares the latest half of worksheets against
+  // the earlier half and returns a signed percentage-point shift. This makes
+  // the tile useful as a trend indicator rather than a static number. Falls
+  // back to null when there aren't enough worksheets for a meaningful split
+  // (fewer than 2), so the row is hidden by the existing conditional.
   const overallAccuracy = useMemo(() => {
-    if (ws.length === 0) return null;
-    let weighted = 0;
-    let totalSheets = 0;
-    perSubjectGrades.forEach((g) => {
-      const subjectWs = ws.filter((w) => w.subject === g.subject);
-      if (subjectWs.length === 0) return;
-      const totalQ = subjectWs.reduce((s, w) => s + (w.total || 0), 0);
-      const totalC = subjectWs.reduce((s, w) => s + (w.correct || 0), 0);
-      if (totalQ === 0) return;
-      const subjectAccuracy = (totalC / totalQ) * 100;
-      weighted += subjectAccuracy * subjectWs.length;
-      totalSheets += subjectWs.length;
-    });
-    if (totalSheets === 0) return null;
-    return Math.round(weighted / totalSheets);
-  }, [ws, perSubjectGrades]);
+    if (ws.length < 2) return null;
+    // Sort chronologically (oldest first) so the split is deterministic.
+    const chronological = [...ws].sort((a, b) => new Date(a.date || 0) - new Date(b.date || 0));
+    const mid = Math.floor(chronological.length / 2);
+    const earlier = chronological.slice(0, mid);
+    const later = chronological.slice(chronological.length - mid); // same size, from the end
+    const accuracyOf = (list) => {
+      const totalQ = list.reduce((s, w) => s + (w.total || 0), 0);
+      const totalC = list.reduce((s, w) => s + (w.correct || 0), 0);
+      return totalQ === 0 ? null : (totalC / totalQ) * 100;
+    };
+    const earlyAcc = accuracyOf(earlier);
+    const lateAcc = accuracyOf(later);
+    if (earlyAcc === null || lateAcc === null) return null;
+    return Math.round(lateAcc - earlyAcc); // signed
+  }, [ws]);
 
   // Chronological worksheet series per subject — mirrors what the Progress
   // page's LineChart consumes, so the dashboard preview matches the full view.
@@ -224,7 +225,9 @@ export default function Dashboard({ go }) {
             overallAccuracy !== null && (
               <div className="mt-2 pt-2 border-t border-[color:var(--color-border)] flex items-baseline justify-between gap-2">
                 <span className="text-[10px] tracking-[0.14em] uppercase font-semibold text-slate-500">Accuracy</span>
-                <span className="text-[15px] font-semibold text-slate-900 tabular-nums">{overallAccuracy}%</span>
+                <span className={`text-[15px] font-semibold tabular-nums ${overallAccuracy > 0 ? 'text-emerald-600' : overallAccuracy < 0 ? 'text-rose-600' : 'text-slate-900'}`}>
+                  {overallAccuracy > 0 ? '+' : overallAccuracy === 0 ? '±' : ''}{overallAccuracy}%
+                </span>
               </div>
             )
           }
