@@ -128,27 +128,27 @@ export default function Dashboard({ go }) {
   }, [perSubjectGrades]);
   const visibleSubjects = useMemo(() => perSubjectGrades.map((g) => g.subject), [perSubjectGrades]);
 
-  // Accuracy change (delta): compares the latest half of worksheets against
-  // the earlier half and returns a signed percentage-point shift. This makes
-  // the tile useful as a trend indicator rather than a static number. Falls
-  // back to null when there aren't enough worksheets for a meaningful split
-  // (fewer than 2), so the row is hidden by the existing conditional.
+  // Accuracy — a plus/minus margin of uncertainty on the predicted grade.
+  // The predicted grade is essentially the mean of your worksheet scores, so
+  // the standard error of that mean (σ / √n) is exactly the uncertainty on
+  // the prediction: how far the true / final grade can plausibly sit from
+  // what we're predicting today. Small scatter or lots of worksheets → tight
+  // band. Big scatter or only a few sheets → wide band.
+  // Requires at least 2 worksheets (need scatter). Clamped to 1..20 pp so the
+  // number always feels sensible and never disappears into 0 or blows up.
   const overallAccuracy = useMemo(() => {
     if (ws.length < 2) return null;
-    // Sort chronologically (oldest first) so the split is deterministic.
-    const chronological = [...ws].sort((a, b) => new Date(a.date || 0) - new Date(b.date || 0));
-    const mid = Math.floor(chronological.length / 2);
-    const earlier = chronological.slice(0, mid);
-    const later = chronological.slice(chronological.length - mid); // same size, from the end
-    const accuracyOf = (list) => {
-      const totalQ = list.reduce((s, w) => s + (w.total || 0), 0);
-      const totalC = list.reduce((s, w) => s + (w.correct || 0), 0);
-      return totalQ === 0 ? null : (totalC / totalQ) * 100;
-    };
-    const earlyAcc = accuracyOf(earlier);
-    const lateAcc = accuracyOf(later);
-    if (earlyAcc === null || lateAcc === null) return null;
-    return Math.round(lateAcc - earlyAcc); // signed
+    const scores = ws.map((w) => Number(w.score) || 0);
+    const n = scores.length;
+    const mean = scores.reduce((s, v) => s + v, 0) / n;
+    // Sample standard deviation (Bessel's correction: divide by n-1).
+    const variance = scores.reduce((s, v) => s + (v - mean) ** 2, 0) / (n - 1);
+    const sigma = Math.sqrt(variance);
+    const stdError = sigma / Math.sqrt(n);
+    // Use ~1 × SE for a snug "typical" band — feels honest at study-app
+    // sample sizes without ballooning to ±20 with only 3 worksheets.
+    const margin = Math.round(stdError);
+    return Math.max(1, Math.min(20, margin));
   }, [ws]);
 
   // Chronological worksheet series per subject — mirrors what the Progress
@@ -224,9 +224,9 @@ export default function Dashboard({ go }) {
           footer={
             overallAccuracy !== null && (
               <div className="mt-2 pt-2 border-t border-[color:var(--color-border)] flex items-baseline justify-between gap-2">
-                <span className="text-[10px] tracking-[0.14em] uppercase font-semibold text-slate-500">Accuracy</span>
-                <span className={`text-[15px] font-semibold tabular-nums ${overallAccuracy > 0 ? 'text-emerald-600' : overallAccuracy < 0 ? 'text-rose-600' : 'text-slate-900'}`}>
-                  {overallAccuracy > 0 ? '+' : overallAccuracy === 0 ? '±' : ''}{overallAccuracy}%
+                <span className="text-[10px] tracking-[0.14em] uppercase font-semibold text-slate-500" title="How far the final grade could plausibly differ from the predicted grade">Accuracy</span>
+                <span className="text-[15px] font-semibold text-slate-900 tabular-nums">
+                  &plusmn;{overallAccuracy}%
                 </span>
               </div>
             )
