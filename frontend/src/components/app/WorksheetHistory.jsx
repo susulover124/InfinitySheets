@@ -1,20 +1,18 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { FileText, AlertTriangle, Sparkles } from 'lucide-react';
+import { FileText, AlertTriangle } from 'lucide-react';
 import EmptyStateScene from '../decor/EmptyStateScene';
+import CreateWorksheetButton from './CreateWorksheetButton';
 
 // Action row shown above the worksheet list. Kept as its own component so it
 // renders identically in the empty state and the populated state below.
 function ActionButtons() {
   return (
     <div className="flex justify-end mb-4 gap-2 flex-wrap">
-      <button
+      <CreateWorksheetButton
         onClick={() => { window.location.hash = '#worksheets'; }}
         data-testid="history-new-worksheet-btn"
-        className="btn-violet inline-flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] font-semibold"
-      >
-        <Sparkles className="w-5 h-5" /> Create new worksheet
-      </button>
+      />
       <button
         onClick={() => { window.location.hash = '#mistakes'; }}
         data-testid="mistake-history-btn"

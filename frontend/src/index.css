@@ -792,3 +792,23 @@ html.dark .c-ring path { stroke: #60a5fa; }
     to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 .animate-tut-in { animation: tut-in 0.32s ease-out both; }
+
+/* ----- Sidebar nav hover (dark mode) -----
+   Light mode keeps its subtle grey wash. In dark mode that wash reads as a
+   harsh white block, so hovering instead outlines the item in blue and
+   tints the label + icon blue over a transparent background. The 1px
+   transparent border is reserved in both themes so item height never
+   shifts on hover or when switching themes. */
+.sidebar-item {
+    border: 1px solid transparent;
+}
+html.dark .sidebar-item:hover,
+html.dark .sidebar-item:focus-visible {
+    background-color: transparent !important;
+    border-color: #3b82f6;
+    color: #60a5fa !important;
+}
+html.dark .sidebar-item:hover svg,
+html.dark .sidebar-item:focus-visible svg {
+    color: #60a5fa !important;
+}

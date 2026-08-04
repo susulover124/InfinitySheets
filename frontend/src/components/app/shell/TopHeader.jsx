@@ -1,5 +1,6 @@
 import React from 'react';
-import { Moon, Sun, Sparkles, PanelLeftOpen } from 'lucide-react';
+import { Moon, Sun, PanelLeftOpen } from 'lucide-react';
+import CreateWorksheetButton from '../CreateWorksheetButton';
 
 /**
  * Page header shown at the top of every dashboard page.
@@ -38,14 +39,11 @@ export default function TopHeader({ examTrack, title, activeKey, isDark, courseC
           {isDark ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5 text-blue-600" />}
         </button>
         {activeKey === 'dashboard' && (
-          <button
+          <CreateWorksheetButton
             onClick={onNewWorksheet}
             data-testid="header-new-worksheet"
-            className="btn-violet inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg text-[14px] font-medium"
-            aria-label="New worksheet"
-          >
-            <Sparkles className="w-5 h-5" /> <span className="hidden sm:inline">New worksheet</span>
-          </button>
+            compact
+          />
         )}
         {activeKey === 'courses' && (
           <div className="hidden sm:block text-[13px] text-slate-500" data-testid="header-course-count">

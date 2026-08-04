@@ -1,9 +1,10 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { SUBJECTS, SUBJECT_INFO } from '../../data/mock';
-import { BookOpen, ArrowRight, FileText } from 'lucide-react';
+import { BookOpen, ArrowRight } from 'lucide-react';
 import InfinityBackground from '../decor/InfinityBackground';
 import SubjectOverview from './SubjectOverview';
+import CreateWorksheetButton from './CreateWorksheetButton';
 
 const toneBadge = {
   primary: 'bg-blue-100 text-blue-700',
@@ -35,13 +36,11 @@ export default function StartStudying({ go, subjectParam }) {
       <div className="relative">
         <div className="flex flex-wrap items-start justify-between gap-3 mb-6">
           <p className="text-[14px] text-slate-500 max-w-[640px]">Pick a subject to see its overview and create a worksheet tailored to your level.</p>
-          <button
+          <CreateWorksheetButton
             onClick={() => { window.location.hash = '#worksheets'; }}
             data-testid="create-worksheet-btn"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] font-semibold text-white bg-blue-600 hover:opacity-95 transition-opacity shrink-0"
-          >
-            <FileText className="w-5 h-5" /> Create a Worksheet
-          </button>
+            className="shrink-0"
+          />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {list.map((s) => {

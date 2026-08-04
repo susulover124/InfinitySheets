@@ -41,7 +41,7 @@ export default function Sidebar({ nav, activeKey, isDemo, onNavigate, onResetDem
               data-nav-key={n.key}
               data-testid={`nav-${n.key}`}
               onClick={() => onNavigate(n.key)}
-              className={`text-left text-[13.5px] px-3 py-2 rounded-lg flex items-center gap-2.5 transition-colors ${isActive ? 'bg-blue-50 text-blue-700 font-medium' : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'}`}
+              className={`sidebar-item text-left text-[13.5px] px-3 py-2 rounded-lg flex items-center gap-2.5 transition-colors ${isActive ? 'bg-blue-50 text-blue-700 font-medium' : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'}`}
             >
               <Icon className={`w-5 h-5 ${isActive ? 'text-blue-700' : 'text-slate-500'}`} strokeWidth={2} />
               <span className="flex-1">{n.label}</span>
@@ -54,7 +54,7 @@ export default function Sidebar({ nav, activeKey, isDemo, onNavigate, onResetDem
           <button
             onClick={onResetDemo}
             data-testid="sidebar-reset-demo"
-            className="w-full text-left text-[13.5px] px-3 py-2 rounded-lg flex items-center gap-2.5 text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+            className="sidebar-item w-full text-left text-[13.5px] px-3 py-2 rounded-lg flex items-center gap-2.5 text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
           >
             <RotateCcw className="w-5 h-5 text-blue-600" />
             <span>Reset demo</span>
@@ -63,7 +63,7 @@ export default function Sidebar({ nav, activeKey, isDemo, onNavigate, onResetDem
         <button
           onClick={onLogout}
           data-testid="sidebar-logout"
-          className="w-full text-left text-[13.5px] px-3 py-2 rounded-lg flex items-center gap-2.5 text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+          className="sidebar-item w-full text-left text-[13.5px] px-3 py-2 rounded-lg flex items-center gap-2.5 text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
         >
           <LogOut className="w-5 h-5" />
           <span>{isDemo ? 'Exit demo' : 'Logout'}</span>

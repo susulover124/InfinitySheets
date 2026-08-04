@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Sparkles, ArrowRight, TrendingDown } from 'lucide-react';
 import EmptyStateScene from '../decor/EmptyStateScene';
+import CreateWorksheetButton from './CreateWorksheetButton';
 import { useStrengthsWeaknesses, useSavedSwOverrides } from '../../hooks/useStrengthsWeaknesses';
 
 export default function Recommendations({ go }) {
@@ -45,6 +46,14 @@ export default function Recommendations({ go }) {
 
   return (
     <div className="flex flex-col gap-3 max-w-[820px]">
+      {/* Standalone creation entry point; the per-recommendation "Start"
+          buttons below stay contextual to their topic. */}
+      <div className="flex justify-end">
+        <CreateWorksheetButton
+          onClick={() => go('worksheets')}
+          data-testid="recommendations-create-worksheet"
+        />
+      </div>
       {/* Threshold context banner */}
       <div className="rounded-xl border border-[color:var(--color-border)] bg-white px-4 py-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] text-slate-600">
         <span className="inline-flex items-center gap-1.5 font-medium text-slate-700">

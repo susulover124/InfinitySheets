@@ -4,6 +4,7 @@ import { SUBJECTS, TOPICS, QUESTION_BANK, FALLBACK_QUESTIONS, EXAM_DURATIONS } f
 import { Check, X, Clock, ChevronLeft, ChevronRight, Sparkles, FileText, AlertCircle, Download } from 'lucide-react';
 import { toast } from 'sonner';
 import jsPDF from 'jspdf';
+import CreateWorksheetButton from './CreateWorksheetButton';
 
 const ANSWER_TYPES = ['Multiple choice', 'Typed response', 'Exam style'];
 const DIFFICULTIES = ['Easy', 'Medium', 'Exam level', 'Hard'];
@@ -756,7 +757,7 @@ export default function Worksheets({ go }) {
           })}
         </div>
         <div className="flex gap-3 mt-6">
-          <button onClick={() => { setStage('build'); setResult(null); }} className="btn-violet px-4 py-2 rounded-lg text-[14px] font-medium">Create another</button>
+          <CreateWorksheetButton onClick={() => { setStage('build'); setResult(null); }} />
           <button onClick={() => go('dashboard')} className="btn-outline-dark px-4 py-2 rounded-lg text-[14px] font-medium">Back to dashboard</button>
         </div>
       </div>

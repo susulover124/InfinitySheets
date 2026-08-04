@@ -3,6 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { QUESTION_BANK, SUBJECTS, SUBJECT_INFO, TOPICS } from '../../data/mock';
 import { BookOpen, Eye, EyeOff, Sparkles, Library, ChevronRight, Search, ArrowLeft, ArrowRight } from 'lucide-react';
 import StudyDecor from '../decor/StudyDecor';
+import CreateWorksheetButton from './CreateWorksheetButton';
 
 // Build a topic -> subject reverse index so we can group questions by subject
 function buildTopicToSubject() {
@@ -141,7 +142,9 @@ function BrowseSubject({ subject, chosenSubjects, onBack, onSwitchSubject, go })
 
   const launchPractice = (topic) => {
     window.sessionStorage.setItem('preselect_subject', subject);
-    window.sessionStorage.setItem('preselect_topic', topic);
+    // No topic means "whole subject" — clear any stale preselection.
+    if (topic) window.sessionStorage.setItem('preselect_topic', topic);
+    else window.sessionStorage.removeItem('preselect_topic');
     go('worksheets');
   };
 
@@ -164,9 +167,17 @@ function BrowseSubject({ subject, chosenSubjects, onBack, onSwitchSubject, go })
           <p className="text-[14px] text-slate-500 max-w-[640px]">A curated, hand-written question bank organized by topic.</p>
           <div className="text-[12px] text-slate-500 mt-1">{list.length} {list.length === 1 ? 'question' : 'questions'} in this subject</div>
         </div>
-        <div className="relative">
-          <Search className="w-5 h-5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
-          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search questions or topics" className="input-base pl-8 w-[260px]" />
+        <div className="flex items-center gap-2 flex-wrap">
+          <div className="relative">
+            <Search className="w-5 h-5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search questions or topics" className="input-base pl-8 w-[260px]" />
+          </div>
+          {/* Standalone creation entry point for the whole subject; the
+              per-topic "Practice these" rows keep their contextual button. */}
+          <CreateWorksheetButton
+            onClick={() => launchPractice(null)}
+            data-testid="qbank-create-worksheet"
+          />
         </div>
       </div>
 
