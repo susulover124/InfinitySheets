@@ -4,6 +4,7 @@ import { CalendarClock, Sparkles } from 'lucide-react';
 import { useStrengthsWeaknesses, useSavedSwOverrides } from '../../hooks/useStrengthsWeaknesses';
 import { predictedScore, formatGrade, scoreToIBGrade } from '../../lib/predictedGrade';
 import PredictedScoreMini from './PredictedScoreMini';
+import CreateWorksheetButton from './CreateWorksheetButton';
 
 // Rotating dashboard greetings. `{name}` is substituted with the student's
 // first name (falling back to "Student"). One is picked per component mount,
@@ -358,7 +359,7 @@ export default function Dashboard({ go }) {
       </div>
 
       <div className="flex items-center gap-3">
-        <button onClick={() => go('worksheets')} className="btn-violet px-5 py-2.5 rounded-lg text-[14px] font-medium">Create a worksheet</button>
+        <CreateWorksheetButton onClick={() => go('worksheets')} className="px-5 py-2.5" />
         <button onClick={() => go('study')} className="btn-outline-dark px-5 py-2.5 rounded-lg text-[14px] font-medium">Browse subjects</button>
       </div>
     </div>

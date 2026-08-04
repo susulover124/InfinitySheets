@@ -1,8 +1,9 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { EXAM_TRACKS, SUBJECT_INFO, TOPICS, TOPIC_SUMMARY } from '../../data/mock';
-import { ArrowLeft, BookOpen, GraduationCap, CalendarClock, ArrowRight, FileText } from 'lucide-react';
+import { ArrowLeft, BookOpen, GraduationCap, CalendarClock, ArrowRight } from 'lucide-react';
 import InfinityBackground from '../decor/InfinityBackground';
+import CreateWorksheetButton from './CreateWorksheetButton';
 
 function normalize(course) {
   if (!course) return null;
@@ -124,12 +125,7 @@ export default function CourseOverview({ courseId, go }) {
               {course.subjects.length} {course.subjects.length === 1 ? 'subject' : 'subjects'} · {totalTopics} {totalTopics === 1 ? 'topic' : 'topics'} to master
             </div>
             <div className="mt-5 flex flex-wrap items-center gap-3">
-              <button
-                onClick={() => { window.location.hash = '#worksheets'; }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-slate-900 hover:bg-slate-100 transition-colors text-[13px] font-semibold"
-              >
-                <FileText className="w-5 h-5 text-blue-700" /> Create a Worksheet
-              </button>
+              <CreateWorksheetButton onClick={() => { window.location.hash = '#worksheets'; }} />
               <button
                 onClick={() => { window.location.hash = '#study'; }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/30 text-white hover:bg-white/10 transition-colors text-[13px] font-medium"

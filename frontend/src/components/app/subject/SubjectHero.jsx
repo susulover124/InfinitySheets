@@ -1,6 +1,7 @@
 import React from 'react';
-import { Sparkles, ListChecks } from 'lucide-react';
+import { ListChecks } from 'lucide-react';
 import InfinityBackground from '../../decor/InfinityBackground';
+import CreateWorksheetButton from '../CreateWorksheetButton';
 
 const toneToBg = {
   primary: 'bg-blue-600',
@@ -42,13 +43,11 @@ export default function SubjectHero({ subject, info, examTrack, topicCount, subj
           </div>
           <p className="text-[15.5px] text-white/85 max-w-[640px] leading-relaxed sr-only">{info.description}</p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <button
+            <CreateWorksheetButton
               onClick={onCreateWorksheet}
               data-testid="hero-create-worksheet"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-slate-900 hover:bg-slate-100 transition-colors text-[14px] font-semibold"
-            >
-              <Sparkles className="w-5 h-5 text-blue-600" /> Create worksheet
-            </button>
+              className="px-5 py-2.5"
+            />
             <button
               onClick={onViewHistory}
               data-testid="hero-view-history"
