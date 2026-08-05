@@ -101,7 +101,6 @@ export default function PredictedGrade() {
           <Reveal>
             <div className="relative">
               <div className="hidden xl:block absolute -left-8 -top-24"><DoodleAtom /></div>
-              <div className="eyebrow mb-5">Predicted grades</div>
               <h2 className="h-display text-[44px] sm:text-[56px] lg:text-[64px] leading-[1.05]">
                 Know your grade <span className="font-serif-italic">before</span> the exam does.
               </h2>

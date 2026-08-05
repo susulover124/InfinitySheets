@@ -33,7 +33,6 @@ export default function HowItWorks() {
       <div className="max-w-[1280px] mx-auto px-6 py-20 lg:py-28">
         <Reveal>
           <div className="relative text-center max-w-[860px] mx-auto">
-            <div className="eyebrow mb-5">How it works</div>
             <h2 className="h-display text-[46px] sm:text-[60px] lg:text-[70px] leading-[1.05]">From your first worksheet to mastery.</h2>
             <p className="mt-6 text-[17px] sm:text-[18px] text-slate-500 leading-relaxed max-w-[680px] mx-auto">
               A simple loop that adapts to you&mdash;every step targets your{' '}

@@ -118,7 +118,6 @@ export default function Features() {
       <div className="hidden lg:block absolute left-[3%] bottom-12"><DoodleStationery /></div>
       <div className="max-w-[1280px] mx-auto px-6 py-24 lg:py-28">
         <div className="max-w-[760px]">
-          <div className="eyebrow mb-5">Features</div>
           <h2 className="h-display text-[44px] sm:text-[54px] lg:text-[62px]">Everything you need to study smarter.</h2>
           <p className="mt-4 text-[15px] text-slate-500">Hover a card to see the feature in action.</p>
         </div>

@@ -20,7 +20,6 @@ export default function WhyDifferent() {
         <div className="hidden lg:block absolute right-[4%] bottom-24"><DoodleBooks width={100} /></div>
         <Reveal>
           <div className="text-center max-w-[860px] mx-auto">
-            <div className="text-[11px] tracking-[0.14em] uppercase font-semibold text-blue-700 mb-5">Why InfinitySheets?</div>
             <h2 className="h-display text-slate-900 text-[44px] sm:text-[60px] lg:text-[72px] leading-[1.05]">
               Real practice, <Emphasis variant="highlight" amber>real results</Emphasis>.
             </h2>

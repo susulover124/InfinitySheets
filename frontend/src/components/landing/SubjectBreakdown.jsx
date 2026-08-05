@@ -14,7 +14,6 @@ export default function SubjectBreakdown() {
       <div className="max-w-[1280px] mx-auto px-6 py-24 lg:py-28">
         <Reveal>
           <div className="max-w-[760px]">
-            <div className="eyebrow mb-5">Subject breakdown</div>
             <h2 className="h-display text-[40px] sm:text-[50px] lg:text-[56px]">Every subject, fully accounted for.</h2>
             <p className="mt-4 text-[15.5px] text-slate-500 max-w-[600px]">
               The same view you get inside the app: improvement, averages, and exactly what it takes

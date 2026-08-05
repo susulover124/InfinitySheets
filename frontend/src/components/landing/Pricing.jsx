@@ -20,7 +20,6 @@ export default function Pricing() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-[1040px] mx-auto">
           <Reveal>
             <div>
-              <div className="eyebrow mb-5">Pricing</div>
               <h2 className="h-display text-[44px] sm:text-[54px] lg:text-[60px] leading-[1.05]">Your grades deserve better. This costs nothing.</h2>
               <p className="mt-6 text-[16px] text-slate-600 leading-relaxed max-w-[520px]">
                 The training that moves exam results has always sat behind a price&mdash;coaching fees, paid

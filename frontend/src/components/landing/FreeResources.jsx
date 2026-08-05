@@ -11,10 +11,6 @@ export default function FreeResources() {
         <div className="grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-16 items-center">
           <Reveal from="left">
             <div>
-              <div className="flex items-center gap-2 mb-5">
-                <Library className="w-4 h-4 text-blue-700" />
-                <span className="text-[11px] tracking-[0.14em] uppercase font-semibold text-blue-700">Free resource directory</span>
-              </div>
               <h2 className="h-display text-slate-900 text-[46px] sm:text-[58px] lg:text-[66px] leading-[1.05]">
                 Every past paper. Every syllabus. One page.
               </h2>

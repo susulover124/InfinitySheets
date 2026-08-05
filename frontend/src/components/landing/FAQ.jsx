@@ -59,7 +59,6 @@ export default function FAQ() {
       <div className="max-w-[1280px] mx-auto px-6 py-28 lg:py-32">
         <Reveal>
           <div className="relative text-center max-w-[720px] mx-auto">
-            <div className="eyebrow mb-5">Questions, answered</div>
             <TypeHeading text="Everything students ask us." className="h-display text-[46px] sm:text-[58px] lg:text-[64px] leading-[1.05]" />
             <div className="hidden lg:block absolute -right-40 -top-4"><DoodleGradCap /></div>
             <div className="hidden lg:block absolute -left-44 top-10"><DoodleBooks width={95} /></div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles } from 'lucide-react';
+import { Plus } from 'lucide-react';
 
 /**
  * The single, shared "Create a New Worksheet" action.
@@ -30,7 +30,7 @@ export default function CreateWorksheetButton({ onClick, compact = false, classN
       className={`btn-violet inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-[13.5px] font-semibold whitespace-nowrap ring-1 ring-white/25 shadow-sm transition-opacity hover:opacity-95 ${className}`}
       {...rest}
     >
-      <Sparkles className="w-5 h-5 shrink-0" />
+      <Plus className="w-5 h-5 shrink-0" strokeWidth={2.6} />
       <span className={compact ? 'hidden sm:inline' : undefined}>{CREATE_WORKSHEET_LABEL}</span>
     </button>
   );

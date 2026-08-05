@@ -10,7 +10,6 @@ export default function FoundingStory() {
       <div className="hidden lg:block absolute left-[3%] bottom-12"><DoodleEquations width={130} /></div>
       <div className="max-w-[820px] mx-auto px-6 py-24 lg:py-28">
         <Reveal>
-          <div className="eyebrow mb-5">Why we built this</div>
           <h2 className="h-display text-[38px] sm:text-[46px] lg:text-[54px] leading-[1.08]">
             Coaching centres don&rsquo;t win by teaching better. They win by treating the exam like a{' '}
             <Emphasis variant="highlight" className="text-slate-800 font-medium">tactical sport</Emphasis>.

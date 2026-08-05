@@ -277,9 +277,18 @@ function SubjectPredictedRow({ s, color, info, p, d, ws, isHovered, dimmed, onHo
   const noPred = p.count === 0;
   const tone = TONE_CLASSES[p.grade?.tone] || TONE_CLASSES.ok;
 
+  // The whole card opens that subject's overview.
+  const openSubject = () => {
+    window.location.hash = `#study?subject=${encodeURIComponent(s)}`;
+  };
+
   return (
-    <div
-      className={`rounded-xl border px-4 py-3 transition-all cursor-default ${
+    <button
+      type="button"
+      onClick={openSubject}
+      data-testid={`predicted-row-${s}`}
+      aria-label={`Open ${s} subject overview`}
+      className={`w-full text-left rounded-xl border px-4 py-3 transition-all cursor-pointer hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 ${
         isHovered
           ? `${tone.border} ring-2 ring-blue-100 bg-white`
           : dimmed
@@ -356,7 +365,7 @@ function SubjectPredictedRow({ s, color, info, p, d, ws, isHovered, dimmed, onHo
           )}
         </>
       )}
-    </div>
+    </button>
   );
 }
 
